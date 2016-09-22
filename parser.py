@@ -5,7 +5,10 @@ tokens = lexico.tokens
 
 # diccionario de variables
 variables = {}
-
+precedence = (
+    ('left','PLUS','MINUS'),
+    ('left','TIMES','DIVIDE')
+    )
 def p_asignacion(p):
     """asignacion : NAME EQUALS expresion"""
     print("\t"+str(p[1])+" = "+str(p[3]))
@@ -35,16 +38,16 @@ def p_terminal_variable(p):
     """terminal : NAME"""
     try:
         p[0] = variables[p[1]]
-    except Exception as e:
-        raise("Valor no definido"+str(e))
+    except LookupError:
+        print("Valor no definido")
 
 def p_error(p):
-    print("Syntax error")
+    print("error")
 
 # constructor de la clase yacc
 yacc.yacc()
 
-entrada = "x = 20"
+entrada = "x = 8 + 2 * 20"
 yacc.parse(entrada)
 
 # mostrar variables guardadas
