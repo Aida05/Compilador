@@ -3,32 +3,49 @@ from ply import yacc
 import lexico
 tokens = lexico.tokens
 
+# diccionario de variables
+variables = {}
+
 def p_asignacion(p):
     """asignacion : NAME EQUALS expresion"""
-    p[0] = p[3]
+    print("\t"+str(p[1])+" = "+str(p[3]))
+    variables[p[1]] = p[3]
     print("-> ASIGNACIÓN")
-    #print("\t"+str(p[0])+" = "+str(p[3]))
 
 def p_expresion(p):
     """expresion : expresion PLUS terminal
                 |  expresion MINUS terminal
                 |  expresion TIMES terminal
-                |  expresion DIVIDE terminal
-                |  terminal"""
+                |  expresion DIVIDE terminal"""
+    if p[2] == '+'  : p[0] = p[1] + p[3]
+    elif p[2] == '-': p[0] = p[1] - p[3]
+    elif p[2] == '*': p[0] = p[1] * p[3]
+    elif p[2] == '/': p[0] = p[1] / p[3]
     print("-> EXPRESIÓN")
 
-def p_terminal(p):
-    """terminal : NUMBER
-                | NAME"""
-    print("-> TERMINAL")
+def p_expresion_terminal(p):
+    """expresion : terminal"""
+    p[0] = p[1]
+
+def p_terminal_numero(p):
+    """terminal : NUMBER"""
+    p[0] = p[1]
+
+def p_terminal_variable(p):
+    """terminal : NAME"""
+    try:
+        p[0] = variables[p[1]]
+    except Exception as e:
+        raise("Valor no definido"+str(e))
 
 def p_error(p):
     print("Syntax error")
 
 # constructor de la clase yacc
 yacc.yacc()
-entrada1 = "x = 20"
-entrada2 = "x = x + 5"
-yacc.parse(entrada1)
-print("\tbreak")
-yacc.parse(entrada2)
+
+entrada = "x = 20"
+yacc.parse(entrada)
+
+# mostrar variables guardadas
+print(variables)
