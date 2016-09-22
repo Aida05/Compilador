@@ -56,7 +56,7 @@ def t_STRING(t):
     t.value=str(t.value)
     return t
 def t_IDENTIFICADOR(t):
-    r"[a=A-zZ_]+[0-9_aA-zZ]*"
+    r"[aA-zZ_]+[0-9_aA-zZ]*"
     t.type = reservada.get(t.value,'IDENTIFICADOR')
     return t
 def t_NUMERO(t):
@@ -72,7 +72,7 @@ def t_comment(t):
 lex.lex()
 lex.input("if:( )")
 
-while True:
+"""while True:
     tok = lex.token()
     if not tok:
         break
@@ -81,4 +81,4 @@ while True:
         #tok.type
         #tok.value
         #tok.line
-        #tok.lexpos
+        #tok.lexpos"""
