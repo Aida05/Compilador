@@ -6,20 +6,20 @@ tokens = lexico.tokens
 # diccionario de variables
 variables = {}
 precedence = (
-    ('left','PLUS','MINUS'),
-    ('left','TIMES','DIVIDE')
+    ('left','SUMA','RESTA'),
+    ('left','MULTIPLICACION','DIVISION')
     )
 def p_asignacion(p):
-    """asignacion : NAME EQUALS expresion"""
+    """asignacion : IDENTIFICADOR IGUAL expresion"""
     print("\t"+str(p[1])+" = "+str(p[3]))
     variables[p[1]] = p[3]
     print("-> ASIGNACIÓN")
 
 def p_expresion(p):
-    """expresion : expresion PLUS terminal
-                |  expresion MINUS terminal
-                |  expresion TIMES terminal
-                |  expresion DIVIDE terminal"""
+    """expresion : expresion SUMA terminal
+                |  expresion RESTA terminal
+                |  expresion MULTIPLICACION terminal
+                |  expresion DIVISION terminal"""
     if p[2] == '+'  : p[0] = p[1] + p[3]
     elif p[2] == '-': p[0] = p[1] - p[3]
     elif p[2] == '*': p[0] = p[1] * p[3]
@@ -31,11 +31,11 @@ def p_expresion_terminal(p):
     p[0] = p[1]
 
 def p_terminal_numero(p):
-    """terminal : NUMBER"""
+    """terminal : NUMERO"""
     p[0] = p[1]
 
 def p_terminal_variable(p):
-    """terminal : NAME"""
+    """terminal : IDENTIFICADOR"""
     try:
         p[0] = variables[p[1]]
     except LookupError:
