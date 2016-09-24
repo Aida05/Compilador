@@ -15,11 +15,14 @@ def p_asignacion(p):
     variables[p[1]] = p[3]
     print("-> ASIGNACIÓN")
 def p_sentencia_expr(p):
-    'sentencia : expresion'
+    """sentencia : expresion
+                | if_stc
+                | expresionRelacional
+                |  print_stc"""
     if(p[1]!=None):
         print (p[1])
 def p_expresion_relacional(p):
-    """expresion : expresion MAYORQUE terminal
+    """expresionRelacional : expresion MAYORQUE terminal
                 |  expresion MENORQUE terminal
                 | expresion MAYORQUEIGUAL terminal
                 | expresion MENORQUEIGUAL terminal
@@ -37,10 +40,18 @@ def p_expresion(p):
         elif p[2] == '-': p[0] = p[1] - p[3]
         elif p[2] == '*': p[0] = p[1] * p[3]
         elif p[2] == '/': p[0] = p[1] / p[3]
-        print("-> EXPRESIÓN")
+        print("-> Expresion aritmetica correcta")
     except:
         print("Error aritmetico")
-
+def p_parentesis(p):
+    "expresion : PARENIZQ expresion PARENDER"
+    p[0] = p[2]
+def p_if_stc(p):
+    'if_stc : IF PARENIZQ expresion PARENDER PUNTOS'
+    print("Linea IF correcta")
+def p_print_stc(p):
+    'print_stc : PRINT PARENIZQ STRING PARENDER'
+    print("Linea PRINT correcta")
 def p_expresion_terminal(p):
     """expresion : terminal"""
     p[0] = p[1]
@@ -57,16 +68,15 @@ def p_terminal_variable(p):
         print("Valor no definido")
 
 def p_error(p):
-    print("error")
+    print("Error en la sintaxis")
 
 # constructor de la clase yacc
 yacc.yacc()
 
 
-entrada = "x = 20 + 5"
+entrada = "print('Celeste')"
 yacc.parse(entrada)
-entrada="x == 8"
-yacc.parse(entrada)
+
 
 # mostrar variables guardadas
 print(variables)
