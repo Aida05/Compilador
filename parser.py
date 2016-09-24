@@ -18,7 +18,8 @@ def p_sentencia_expr(p):
     """sentencia : expresion
                 | if_stc
                 | expresionRelacional
-                |  print_stc"""
+                |  print_stc
+                | expresionGrupo"""
     if(p[1]!=None):
         print (p[1])
 def p_expresion_relacional(p):
@@ -44,14 +45,17 @@ def p_expresion(p):
     except:
         print("Error aritmetico")
 def p_parentesis(p):
-    "expresion : PARENIZQ expresion PARENDER"
+    "expresionGrupo : PARENIZQ expresion PARENDER"
     p[0] = p[2]
+def p_test(p):
+    'test : PARENIZQ expresionRelacional PARENDER'
 def p_if_stc(p):
-    'if_stc : IF PARENIZQ expresion PARENDER PUNTOS'
+    'if_stc : IF test PUNTOS'
     print("Linea IF correcta")
 def p_print_stc(p):
     'print_stc : PRINT PARENIZQ STRING PARENDER'
     print("Linea PRINT correcta")
+
 def p_expresion_terminal(p):
     """expresion : terminal"""
     p[0] = p[1]
@@ -74,7 +78,7 @@ def p_error(p):
 yacc.yacc()
 
 
-entrada = "print('Celeste')"
+entrada = "if(4==5):"
 yacc.parse(entrada)
 
 
