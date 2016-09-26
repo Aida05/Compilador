@@ -20,10 +20,11 @@ def p_asignacion(p):
 def p_sentencia_expr(p):
     """sentencia : expresion
                 | if_stc
+                | else_stc
+                | elif_stc
                 | expresionRelacional
                 | expresionLogica
-                |  print_stc
-                | expresionGrupo"""
+                |  print_stc"""
     if(p[1]!=None):
         print (p[1])
 
@@ -33,31 +34,30 @@ def p_expresion_logica(p):
                 | NOT PARENIZQ expresiones PARENDER"""
     print ("Expresion logica")
 
-
 def p_expresiones(p):
     """expresiones : expresionRelacional
                 | expresion"""
 
 def p_expresion_relacional(p):
-    """expresionRelacional : expresion MAYORQUE terminal
-                |  expresion MENORQUE terminal
-                | expresion MAYORIGUALQUE terminal
-                | expresion MENORIGUALQUE terminal
-                | expresion IN terminal
-                | expresion NOTIN terminal
-                | expresion IS terminal
-                | expresion ISNOT terminal
-                | expresion DIFERENTE terminal
-                | expresion DISTINTO terminal
-                | expresion IGUAL terminal
-                | expresion IGUALA terminal"""
+    """expresionRelacional : expresion MAYORQUE expresion
+                |  expresion MENORQUE expresion
+                | expresion MAYORIGUALQUE expresion
+                | expresion MENORIGUALQUE expresion
+                | expresion IN expresion
+                | expresion NOTIN expresion
+                | expresion IS expresion
+                | expresion ISNOT expresion
+                | expresion DIFERENTE expresion
+                | expresion DISTINTO expresion
+                | expresion IGUAL expresion
+                | expresion IGUALA expresion"""
     print ("Expresion de comparacion")
 
 def p_expresion_aritmetica(p):
-    """expresion : expresion SUMA terminal
-                |  expresion RESTA terminal
-                |  expresion MULTIPLICACION terminal
-                |  expresion DIVISION terminal"""
+    """expresion : expresion SUMA expresion
+                |  expresion RESTA expresion
+                |  expresion MULTIPLICACION expresion
+                |  expresion DIVISION expresion"""
     try:
         if p[2] == '+'  : p[0] = p[1] + p[3]
         elif p[2] == '-': p[0] = p[1] - p[3]
@@ -67,15 +67,20 @@ def p_expresion_aritmetica(p):
     except:
         print("Error aritmetico")
 
-def p_parentesis(p):
-    """expresionGrupo : PARENIZQ expresion PARENDER"""
-
 def p_test(p):
-    'test : PARENIZQ expresionRelacional PARENDER'
+    'test : PARENIZQ expresiones PARENDER'
 
 def p_if_stc(p):
     'if_stc : IF test PUNTOS'
     print("Linea IF correcta")
+
+def p_else_stc(p):
+    'else : ELSE PUNTOS'
+    print("Linea ELSE correcta")
+
+def p_elif_stc(p):
+    'elif : ELIF test PUNTOS'
+    print("Linea ELIF correcta")
 
 def p_print_stc(p):
     'print_stc : PRINT PARENIZQ STRING PARENDER'

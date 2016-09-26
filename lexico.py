@@ -2,6 +2,7 @@ import ply.lex as lex
 #Diccionario de palabras reservadas
 reservada = {
    'if' : 'IF',
+   'elif' : 'ELIF',
    'then' : 'THEN',
    'else' : 'ELSE',
    'and' : 'AND',

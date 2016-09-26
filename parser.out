@@ -3,7 +3,6 @@ Created by PLY version 3.9 (http://www.dabeaz.com/ply)
 Unused terminals:
 
     THEN
-    ELIF
     RETURN
     GLOBAL
     ASSERT
@@ -17,7 +16,6 @@ Unused terminals:
     EXEC
     CLASS
     HEX
-    ELSE
     TRY
     FINALLY
     PASS
@@ -35,31 +33,31 @@ Rule 3     sentencia -> if_stc
 Rule 4     sentencia -> expresionRelacional
 Rule 5     sentencia -> expresionLogica
 Rule 6     sentencia -> print_stc
-Rule 7     sentencia -> expresionGrupo
-Rule 8     expresionLogica -> PARENIZQ expresiones OR expresiones PARENDER
-Rule 9     expresionLogica -> PARENIZQ expresiones AND expresiones PARENDER
-Rule 10    expresionLogica -> NOT PARENIZQ expresiones PARENDER
-Rule 11    expresiones -> expresionRelacional
-Rule 12    expresiones -> expresion
-Rule 13    expresionRelacional -> expresion MAYORQUE terminal
-Rule 14    expresionRelacional -> expresion MENORQUE terminal
-Rule 15    expresionRelacional -> expresion MAYORIGUALQUE terminal
-Rule 16    expresionRelacional -> expresion MENORIGUALQUE terminal
-Rule 17    expresionRelacional -> expresion IN terminal
-Rule 18    expresionRelacional -> expresion NOTIN terminal
-Rule 19    expresionRelacional -> expresion IS terminal
-Rule 20    expresionRelacional -> expresion ISNOT terminal
-Rule 21    expresionRelacional -> expresion DIFERENTE terminal
-Rule 22    expresionRelacional -> expresion DISTINTO terminal
-Rule 23    expresionRelacional -> expresion IGUAL terminal
-Rule 24    expresionRelacional -> expresion IGUALA terminal
-Rule 25    expresion -> expresion SUMA terminal
-Rule 26    expresion -> expresion RESTA terminal
-Rule 27    expresion -> expresion MULTIPLICACION terminal
-Rule 28    expresion -> expresion DIVISION terminal
-Rule 29    expresionGrupo -> PARENIZQ expresion PARENDER
-Rule 30    test -> PARENIZQ expresionRelacional PARENDER
-Rule 31    if_stc -> IF test PUNTOS
+Rule 7     expresionLogica -> PARENIZQ expresiones OR expresiones PARENDER
+Rule 8     expresionLogica -> PARENIZQ expresiones AND expresiones PARENDER
+Rule 9     expresionLogica -> NOT PARENIZQ expresiones PARENDER
+Rule 10    expresiones -> expresionRelacional
+Rule 11    expresiones -> expresion
+Rule 12    expresionRelacional -> expresion MAYORQUE expresion
+Rule 13    expresionRelacional -> expresion MENORQUE expresion
+Rule 14    expresionRelacional -> expresion MAYORIGUALQUE expresion
+Rule 15    expresionRelacional -> expresion MENORIGUALQUE expresion
+Rule 16    expresionRelacional -> expresion IN expresion
+Rule 17    expresionRelacional -> expresion NOTIN expresion
+Rule 18    expresionRelacional -> expresion IS expresion
+Rule 19    expresionRelacional -> expresion ISNOT expresion
+Rule 20    expresionRelacional -> expresion DIFERENTE expresion
+Rule 21    expresionRelacional -> expresion DISTINTO expresion
+Rule 22    expresionRelacional -> expresion IGUAL expresion
+Rule 23    expresionRelacional -> expresion IGUALA expresion
+Rule 24    expresion -> expresion SUMA expresion
+Rule 25    expresion -> expresion RESTA expresion
+Rule 26    expresion -> expresion MULTIPLICACION expresion
+Rule 27    expresion -> expresion DIVISION expresion
+Rule 28    test -> PARENIZQ expresiones PARENDER
+Rule 29    if_stc -> IF test PUNTOS
+Rule 30    else -> ELSE PUNTOS
+Rule 31    elif -> ELIF test PUNTOS
 Rule 32    print_stc -> PRINT PARENIZQ STRING PARENDER
 Rule 33    expresion -> terminal
 Rule 34    terminal -> NUMERO
@@ -67,18 +65,18 @@ Rule 35    terminal -> IDENTIFICADOR
 
 Terminals, with rules where they appear
 
-AND                  : 9
+AND                  : 8
 ASSERT               : 
 BREAK                : 
 CLASS                : 
 CONTINUE             : 
 DEF                  : 
 DEL                  : 
-DIFERENTE            : 21
-DISTINTO             : 22
-DIVISION             : 28
-ELIF                 : 
-ELSE                 : 
+DIFERENTE            : 20
+DISTINTO             : 21
+DIVISION             : 27
+ELIF                 : 31
+ELSE                 : 30
 EXCEPT               : 
 EXEC                 : 
 FINALLY              : 
@@ -87,33 +85,33 @@ FROM                 :
 GLOBAL               : 
 HEX                  : 
 IDENTIFICADOR        : 1 35
-IF                   : 31
-IGUAL                : 1 23
-IGUALA               : 24
+IF                   : 29
+IGUAL                : 1 22
+IGUALA               : 23
 IMPORT               : 
-IN                   : 17
-IS                   : 19
-ISNOT                : 20
+IN                   : 16
+IS                   : 18
+ISNOT                : 19
 LAMBDA               : 
-MAYORIGUALQUE        : 15
-MAYORQUE             : 13
-MENORIGUALQUE        : 16
-MENORQUE             : 14
-MULTIPLICACION       : 27
-NOT                  : 10
-NOTIN                : 18
+MAYORIGUALQUE        : 14
+MAYORQUE             : 12
+MENORIGUALQUE        : 15
+MENORQUE             : 13
+MULTIPLICACION       : 26
+NOT                  : 9
+NOTIN                : 17
 NUMERO               : 34
-OR                   : 8
-PARENDER             : 8 9 10 29 30 32
-PARENIZQ             : 8 9 10 29 30 32
+OR                   : 7
+PARENDER             : 7 8 9 28 32
+PARENIZQ             : 7 8 9 28 32
 PASS                 : 
 PRINT                : 32
-PUNTOS               : 31
+PUNTOS               : 29 30 31
 RAISE                : 
-RESTA                : 26
+RESTA                : 25
 RETURN               : 
 STRING               : 32
-SUMA                 : 25
+SUMA                 : 24
 THEN                 : 
 TRY                  : 
 WHILE                : 
@@ -121,16 +119,17 @@ error                :
 
 Nonterminals, with rules where they appear
 
-expresion            : 1 2 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
-expresionGrupo       : 7
+elif                 : 
+else                 : 
+expresion            : 1 2 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 25 25 26 26 27 27
 expresionLogica      : 5
-expresionRelacional  : 4 11 30
-expresiones          : 8 8 9 9 10
+expresionRelacional  : 4 10
+expresiones          : 7 7 8 8 9 28
 if_stc               : 3
 print_stc            : 6
 sentencia            : 0
-terminal             : 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 33
-test                 : 31
+terminal             : 33
+test                 : 29 31
 
 Parsing method: LALR
 
@@ -143,37 +142,35 @@ state 0
     (4) sentencia -> . expresionRelacional
     (5) sentencia -> . expresionLogica
     (6) sentencia -> . print_stc
-    (7) sentencia -> . expresionGrupo
-    (25) expresion -> . expresion SUMA terminal
-    (26) expresion -> . expresion RESTA terminal
-    (27) expresion -> . expresion MULTIPLICACION terminal
-    (28) expresion -> . expresion DIVISION terminal
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
     (33) expresion -> . terminal
-    (31) if_stc -> . IF test PUNTOS
-    (13) expresionRelacional -> . expresion MAYORQUE terminal
-    (14) expresionRelacional -> . expresion MENORQUE terminal
-    (15) expresionRelacional -> . expresion MAYORIGUALQUE terminal
-    (16) expresionRelacional -> . expresion MENORIGUALQUE terminal
-    (17) expresionRelacional -> . expresion IN terminal
-    (18) expresionRelacional -> . expresion NOTIN terminal
-    (19) expresionRelacional -> . expresion IS terminal
-    (20) expresionRelacional -> . expresion ISNOT terminal
-    (21) expresionRelacional -> . expresion DIFERENTE terminal
-    (22) expresionRelacional -> . expresion DISTINTO terminal
-    (23) expresionRelacional -> . expresion IGUAL terminal
-    (24) expresionRelacional -> . expresion IGUALA terminal
-    (8) expresionLogica -> . PARENIZQ expresiones OR expresiones PARENDER
-    (9) expresionLogica -> . PARENIZQ expresiones AND expresiones PARENDER
-    (10) expresionLogica -> . NOT PARENIZQ expresiones PARENDER
+    (29) if_stc -> . IF test PUNTOS
+    (12) expresionRelacional -> . expresion MAYORQUE expresion
+    (13) expresionRelacional -> . expresion MENORQUE expresion
+    (14) expresionRelacional -> . expresion MAYORIGUALQUE expresion
+    (15) expresionRelacional -> . expresion MENORIGUALQUE expresion
+    (16) expresionRelacional -> . expresion IN expresion
+    (17) expresionRelacional -> . expresion NOTIN expresion
+    (18) expresionRelacional -> . expresion IS expresion
+    (19) expresionRelacional -> . expresion ISNOT expresion
+    (20) expresionRelacional -> . expresion DIFERENTE expresion
+    (21) expresionRelacional -> . expresion DISTINTO expresion
+    (22) expresionRelacional -> . expresion IGUAL expresion
+    (23) expresionRelacional -> . expresion IGUALA expresion
+    (7) expresionLogica -> . PARENIZQ expresiones OR expresiones PARENDER
+    (8) expresionLogica -> . PARENIZQ expresiones AND expresiones PARENDER
+    (9) expresionLogica -> . NOT PARENIZQ expresiones PARENDER
     (32) print_stc -> . PRINT PARENIZQ STRING PARENDER
-    (29) expresionGrupo -> . PARENIZQ expresion PARENDER
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     IDENTIFICADOR   shift and go to state 9
     IF              shift and go to state 11
     PARENIZQ        shift and go to state 8
-    NOT             shift and go to state 14
+    NOT             shift and go to state 13
     PRINT           shift and go to state 4
     NUMERO          shift and go to state 10
 
@@ -181,7 +178,6 @@ state 0
     sentencia                      shift and go to state 5
     expresionLogica                shift and go to state 1
     expresionRelacional            shift and go to state 2
-    expresionGrupo                 shift and go to state 13
     terminal                       shift and go to state 6
     print_stc                      shift and go to state 3
     if_stc                         shift and go to state 7
@@ -211,7 +207,7 @@ state 4
 
     (32) print_stc -> PRINT . PARENIZQ STRING PARENDER
 
-    PARENIZQ        shift and go to state 15
+    PARENIZQ        shift and go to state 14
 
 
 state 5
@@ -229,6 +225,9 @@ state 6
     MULTIPLICACION  reduce using rule 33 (expresion -> terminal .)
     DIVISION        reduce using rule 33 (expresion -> terminal .)
     $end            reduce using rule 33 (expresion -> terminal .)
+    OR              reduce using rule 33 (expresion -> terminal .)
+    AND             reduce using rule 33 (expresion -> terminal .)
+    PARENDER        reduce using rule 33 (expresion -> terminal .)
     MAYORQUE        reduce using rule 33 (expresion -> terminal .)
     MENORQUE        reduce using rule 33 (expresion -> terminal .)
     MAYORIGUALQUE   reduce using rule 33 (expresion -> terminal .)
@@ -241,9 +240,6 @@ state 6
     DISTINTO        reduce using rule 33 (expresion -> terminal .)
     IGUAL           reduce using rule 33 (expresion -> terminal .)
     IGUALA          reduce using rule 33 (expresion -> terminal .)
-    PARENDER        reduce using rule 33 (expresion -> terminal .)
-    OR              reduce using rule 33 (expresion -> terminal .)
-    AND             reduce using rule 33 (expresion -> terminal .)
 
 
 state 7
@@ -255,45 +251,44 @@ state 7
 
 state 8
 
-    (8) expresionLogica -> PARENIZQ . expresiones OR expresiones PARENDER
-    (9) expresionLogica -> PARENIZQ . expresiones AND expresiones PARENDER
-    (29) expresionGrupo -> PARENIZQ . expresion PARENDER
-    (11) expresiones -> . expresionRelacional
-    (12) expresiones -> . expresion
-    (25) expresion -> . expresion SUMA terminal
-    (26) expresion -> . expresion RESTA terminal
-    (27) expresion -> . expresion MULTIPLICACION terminal
-    (28) expresion -> . expresion DIVISION terminal
+    (7) expresionLogica -> PARENIZQ . expresiones OR expresiones PARENDER
+    (8) expresionLogica -> PARENIZQ . expresiones AND expresiones PARENDER
+    (10) expresiones -> . expresionRelacional
+    (11) expresiones -> . expresion
+    (12) expresionRelacional -> . expresion MAYORQUE expresion
+    (13) expresionRelacional -> . expresion MENORQUE expresion
+    (14) expresionRelacional -> . expresion MAYORIGUALQUE expresion
+    (15) expresionRelacional -> . expresion MENORIGUALQUE expresion
+    (16) expresionRelacional -> . expresion IN expresion
+    (17) expresionRelacional -> . expresion NOTIN expresion
+    (18) expresionRelacional -> . expresion IS expresion
+    (19) expresionRelacional -> . expresion ISNOT expresion
+    (20) expresionRelacional -> . expresion DIFERENTE expresion
+    (21) expresionRelacional -> . expresion DISTINTO expresion
+    (22) expresionRelacional -> . expresion IGUAL expresion
+    (23) expresionRelacional -> . expresion IGUALA expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
     (33) expresion -> . terminal
-    (13) expresionRelacional -> . expresion MAYORQUE terminal
-    (14) expresionRelacional -> . expresion MENORQUE terminal
-    (15) expresionRelacional -> . expresion MAYORIGUALQUE terminal
-    (16) expresionRelacional -> . expresion MENORIGUALQUE terminal
-    (17) expresionRelacional -> . expresion IN terminal
-    (18) expresionRelacional -> . expresion NOTIN terminal
-    (19) expresionRelacional -> . expresion IS terminal
-    (20) expresionRelacional -> . expresion ISNOT terminal
-    (21) expresionRelacional -> . expresion DIFERENTE terminal
-    (22) expresionRelacional -> . expresion DISTINTO terminal
-    (23) expresionRelacional -> . expresion IGUAL terminal
-    (24) expresionRelacional -> . expresion IGUALA terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    expresion                      shift and go to state 19
+    expresion                      shift and go to state 18
     terminal                       shift and go to state 6
-    expresiones                    shift and go to state 17
-    expresionRelacional            shift and go to state 16
+    expresiones                    shift and go to state 16
+    expresionRelacional            shift and go to state 15
 
 state 9
 
     (1) sentencia -> IDENTIFICADOR . IGUAL expresion
     (35) terminal -> IDENTIFICADOR .
 
-    IGUAL           shift and go to state 20
+    IGUAL           shift and go to state 19
     SUMA            reduce using rule 35 (terminal -> IDENTIFICADOR .)
     RESTA           reduce using rule 35 (terminal -> IDENTIFICADOR .)
     MULTIPLICACION  reduce using rule 35 (terminal -> IDENTIFICADOR .)
@@ -318,14 +313,14 @@ state 10
 
     (34) terminal -> NUMERO .
 
-    $end            reduce using rule 34 (terminal -> NUMERO .)
-    OR              reduce using rule 34 (terminal -> NUMERO .)
-    AND             reduce using rule 34 (terminal -> NUMERO .)
-    PARENDER        reduce using rule 34 (terminal -> NUMERO .)
     SUMA            reduce using rule 34 (terminal -> NUMERO .)
     RESTA           reduce using rule 34 (terminal -> NUMERO .)
     MULTIPLICACION  reduce using rule 34 (terminal -> NUMERO .)
     DIVISION        reduce using rule 34 (terminal -> NUMERO .)
+    $end            reduce using rule 34 (terminal -> NUMERO .)
+    OR              reduce using rule 34 (terminal -> NUMERO .)
+    AND             reduce using rule 34 (terminal -> NUMERO .)
+    PARENDER        reduce using rule 34 (terminal -> NUMERO .)
     MAYORQUE        reduce using rule 34 (terminal -> NUMERO .)
     MENORQUE        reduce using rule 34 (terminal -> NUMERO .)
     MAYORIGUALQUE   reduce using rule 34 (terminal -> NUMERO .)
@@ -342,103 +337,96 @@ state 10
 
 state 11
 
-    (31) if_stc -> IF . test PUNTOS
-    (30) test -> . PARENIZQ expresionRelacional PARENDER
+    (29) if_stc -> IF . test PUNTOS
+    (28) test -> . PARENIZQ expresiones PARENDER
 
-    PARENIZQ        shift and go to state 22
+    PARENIZQ        shift and go to state 21
 
-    test                           shift and go to state 21
+    test                           shift and go to state 20
 
 state 12
 
     (2) sentencia -> expresion .
-    (25) expresion -> expresion . SUMA terminal
-    (26) expresion -> expresion . RESTA terminal
-    (27) expresion -> expresion . MULTIPLICACION terminal
-    (28) expresion -> expresion . DIVISION terminal
-    (13) expresionRelacional -> expresion . MAYORQUE terminal
-    (14) expresionRelacional -> expresion . MENORQUE terminal
-    (15) expresionRelacional -> expresion . MAYORIGUALQUE terminal
-    (16) expresionRelacional -> expresion . MENORIGUALQUE terminal
-    (17) expresionRelacional -> expresion . IN terminal
-    (18) expresionRelacional -> expresion . NOTIN terminal
-    (19) expresionRelacional -> expresion . IS terminal
-    (20) expresionRelacional -> expresion . ISNOT terminal
-    (21) expresionRelacional -> expresion . DIFERENTE terminal
-    (22) expresionRelacional -> expresion . DISTINTO terminal
-    (23) expresionRelacional -> expresion . IGUAL terminal
-    (24) expresionRelacional -> expresion . IGUALA terminal
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
+    (12) expresionRelacional -> expresion . MAYORQUE expresion
+    (13) expresionRelacional -> expresion . MENORQUE expresion
+    (14) expresionRelacional -> expresion . MAYORIGUALQUE expresion
+    (15) expresionRelacional -> expresion . MENORIGUALQUE expresion
+    (16) expresionRelacional -> expresion . IN expresion
+    (17) expresionRelacional -> expresion . NOTIN expresion
+    (18) expresionRelacional -> expresion . IS expresion
+    (19) expresionRelacional -> expresion . ISNOT expresion
+    (20) expresionRelacional -> expresion . DIFERENTE expresion
+    (21) expresionRelacional -> expresion . DISTINTO expresion
+    (22) expresionRelacional -> expresion . IGUAL expresion
+    (23) expresionRelacional -> expresion . IGUALA expresion
 
     $end            reduce using rule 2 (sentencia -> expresion .)
-    SUMA            shift and go to state 38
-    RESTA           shift and go to state 36
-    MULTIPLICACION  shift and go to state 32
-    DIVISION        shift and go to state 23
-    MAYORQUE        shift and go to state 34
-    MENORQUE        shift and go to state 33
-    MAYORIGUALQUE   shift and go to state 27
-    MENORIGUALQUE   shift and go to state 30
-    IN              shift and go to state 29
-    NOTIN           shift and go to state 24
-    IS              shift and go to state 28
-    ISNOT           shift and go to state 25
-    DIFERENTE       shift and go to state 31
-    DISTINTO        shift and go to state 26
-    IGUAL           shift and go to state 37
-    IGUALA          shift and go to state 35
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
+    MAYORQUE        shift and go to state 33
+    MENORQUE        shift and go to state 32
+    MAYORIGUALQUE   shift and go to state 26
+    MENORIGUALQUE   shift and go to state 29
+    IN              shift and go to state 28
+    NOTIN           shift and go to state 23
+    IS              shift and go to state 27
+    ISNOT           shift and go to state 24
+    DIFERENTE       shift and go to state 30
+    DISTINTO        shift and go to state 25
+    IGUAL           shift and go to state 36
+    IGUALA          shift and go to state 34
 
 
 state 13
 
-    (7) sentencia -> expresionGrupo .
+    (9) expresionLogica -> NOT . PARENIZQ expresiones PARENDER
 
-    $end            reduce using rule 7 (sentencia -> expresionGrupo .)
+    PARENIZQ        shift and go to state 38
 
 
 state 14
 
-    (10) expresionLogica -> NOT . PARENIZQ expresiones PARENDER
+    (32) print_stc -> PRINT PARENIZQ . STRING PARENDER
 
-    PARENIZQ        shift and go to state 39
+    STRING          shift and go to state 39
 
 
 state 15
 
-    (32) print_stc -> PRINT PARENIZQ . STRING PARENDER
+    (10) expresiones -> expresionRelacional .
 
-    STRING          shift and go to state 40
+    PARENDER        reduce using rule 10 (expresiones -> expresionRelacional .)
+    OR              reduce using rule 10 (expresiones -> expresionRelacional .)
+    AND             reduce using rule 10 (expresiones -> expresionRelacional .)
 
 
 state 16
 
-    (11) expresiones -> expresionRelacional .
+    (7) expresionLogica -> PARENIZQ expresiones . OR expresiones PARENDER
+    (8) expresionLogica -> PARENIZQ expresiones . AND expresiones PARENDER
 
-    PARENDER        reduce using rule 11 (expresiones -> expresionRelacional .)
-    OR              reduce using rule 11 (expresiones -> expresionRelacional .)
-    AND             reduce using rule 11 (expresiones -> expresionRelacional .)
+    OR              shift and go to state 41
+    AND             shift and go to state 40
 
 
 state 17
 
-    (8) expresionLogica -> PARENIZQ expresiones . OR expresiones PARENDER
-    (9) expresionLogica -> PARENIZQ expresiones . AND expresiones PARENDER
-
-    OR              shift and go to state 42
-    AND             shift and go to state 41
-
-
-state 18
-
     (35) terminal -> IDENTIFICADOR .
 
-    $end            reduce using rule 35 (terminal -> IDENTIFICADOR .)
-    OR              reduce using rule 35 (terminal -> IDENTIFICADOR .)
-    AND             reduce using rule 35 (terminal -> IDENTIFICADOR .)
-    PARENDER        reduce using rule 35 (terminal -> IDENTIFICADOR .)
     SUMA            reduce using rule 35 (terminal -> IDENTIFICADOR .)
     RESTA           reduce using rule 35 (terminal -> IDENTIFICADOR .)
     MULTIPLICACION  reduce using rule 35 (terminal -> IDENTIFICADOR .)
     DIVISION        reduce using rule 35 (terminal -> IDENTIFICADOR .)
+    $end            reduce using rule 35 (terminal -> IDENTIFICADOR .)
+    OR              reduce using rule 35 (terminal -> IDENTIFICADOR .)
+    AND             reduce using rule 35 (terminal -> IDENTIFICADOR .)
+    PARENDER        reduce using rule 35 (terminal -> IDENTIFICADOR .)
     MAYORQUE        reduce using rule 35 (terminal -> IDENTIFICADOR .)
     MENORQUE        reduce using rule 35 (terminal -> IDENTIFICADOR .)
     MAYORIGUALQUE   reduce using rule 35 (terminal -> IDENTIFICADOR .)
@@ -453,772 +441,919 @@ state 18
     IGUALA          reduce using rule 35 (terminal -> IDENTIFICADOR .)
 
 
+state 18
+
+    (11) expresiones -> expresion .
+    (12) expresionRelacional -> expresion . MAYORQUE expresion
+    (13) expresionRelacional -> expresion . MENORQUE expresion
+    (14) expresionRelacional -> expresion . MAYORIGUALQUE expresion
+    (15) expresionRelacional -> expresion . MENORIGUALQUE expresion
+    (16) expresionRelacional -> expresion . IN expresion
+    (17) expresionRelacional -> expresion . NOTIN expresion
+    (18) expresionRelacional -> expresion . IS expresion
+    (19) expresionRelacional -> expresion . ISNOT expresion
+    (20) expresionRelacional -> expresion . DIFERENTE expresion
+    (21) expresionRelacional -> expresion . DISTINTO expresion
+    (22) expresionRelacional -> expresion . IGUAL expresion
+    (23) expresionRelacional -> expresion . IGUALA expresion
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
+
+    PARENDER        reduce using rule 11 (expresiones -> expresion .)
+    OR              reduce using rule 11 (expresiones -> expresion .)
+    AND             reduce using rule 11 (expresiones -> expresion .)
+    MAYORQUE        shift and go to state 33
+    MENORQUE        shift and go to state 32
+    MAYORIGUALQUE   shift and go to state 26
+    MENORIGUALQUE   shift and go to state 29
+    IN              shift and go to state 28
+    NOTIN           shift and go to state 23
+    IS              shift and go to state 27
+    ISNOT           shift and go to state 24
+    DIFERENTE       shift and go to state 30
+    DISTINTO        shift and go to state 25
+    IGUAL           shift and go to state 36
+    IGUALA          shift and go to state 34
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
+
+
 state 19
 
-    (29) expresionGrupo -> PARENIZQ expresion . PARENDER
-    (12) expresiones -> expresion .
-    (25) expresion -> expresion . SUMA terminal
-    (26) expresion -> expresion . RESTA terminal
-    (27) expresion -> expresion . MULTIPLICACION terminal
-    (28) expresion -> expresion . DIVISION terminal
-    (13) expresionRelacional -> expresion . MAYORQUE terminal
-    (14) expresionRelacional -> expresion . MENORQUE terminal
-    (15) expresionRelacional -> expresion . MAYORIGUALQUE terminal
-    (16) expresionRelacional -> expresion . MENORIGUALQUE terminal
-    (17) expresionRelacional -> expresion . IN terminal
-    (18) expresionRelacional -> expresion . NOTIN terminal
-    (19) expresionRelacional -> expresion . IS terminal
-    (20) expresionRelacional -> expresion . ISNOT terminal
-    (21) expresionRelacional -> expresion . DIFERENTE terminal
-    (22) expresionRelacional -> expresion . DISTINTO terminal
-    (23) expresionRelacional -> expresion . IGUAL terminal
-    (24) expresionRelacional -> expresion . IGUALA terminal
+    (1) sentencia -> IDENTIFICADOR IGUAL . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
+    (34) terminal -> . NUMERO
+    (35) terminal -> . IDENTIFICADOR
 
-    PARENDER        shift and go to state 43
-    OR              reduce using rule 12 (expresiones -> expresion .)
-    AND             reduce using rule 12 (expresiones -> expresion .)
-    SUMA            shift and go to state 38
-    RESTA           shift and go to state 36
-    MULTIPLICACION  shift and go to state 32
-    DIVISION        shift and go to state 23
-    MAYORQUE        shift and go to state 34
-    MENORQUE        shift and go to state 33
-    MAYORIGUALQUE   shift and go to state 27
-    MENORIGUALQUE   shift and go to state 30
-    IN              shift and go to state 29
-    NOTIN           shift and go to state 24
-    IS              shift and go to state 28
-    ISNOT           shift and go to state 25
-    DIFERENTE       shift and go to state 31
-    DISTINTO        shift and go to state 26
-    IGUAL           shift and go to state 37
-    IGUALA          shift and go to state 35
+    NUMERO          shift and go to state 10
+    IDENTIFICADOR   shift and go to state 17
 
+    expresion                      shift and go to state 42
+    terminal                       shift and go to state 6
 
 state 20
 
-    (1) sentencia -> IDENTIFICADOR IGUAL . expresion
-    (25) expresion -> . expresion SUMA terminal
-    (26) expresion -> . expresion RESTA terminal
-    (27) expresion -> . expresion MULTIPLICACION terminal
-    (28) expresion -> . expresion DIVISION terminal
-    (33) expresion -> . terminal
-    (34) terminal -> . NUMERO
-    (35) terminal -> . IDENTIFICADOR
+    (29) if_stc -> IF test . PUNTOS
 
-    NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    PUNTOS          shift and go to state 43
 
-    expresion                      shift and go to state 44
-    terminal                       shift and go to state 6
 
 state 21
 
-    (31) if_stc -> IF test . PUNTOS
+    (28) test -> PARENIZQ . expresiones PARENDER
+    (10) expresiones -> . expresionRelacional
+    (11) expresiones -> . expresion
+    (12) expresionRelacional -> . expresion MAYORQUE expresion
+    (13) expresionRelacional -> . expresion MENORQUE expresion
+    (14) expresionRelacional -> . expresion MAYORIGUALQUE expresion
+    (15) expresionRelacional -> . expresion MENORIGUALQUE expresion
+    (16) expresionRelacional -> . expresion IN expresion
+    (17) expresionRelacional -> . expresion NOTIN expresion
+    (18) expresionRelacional -> . expresion IS expresion
+    (19) expresionRelacional -> . expresion ISNOT expresion
+    (20) expresionRelacional -> . expresion DIFERENTE expresion
+    (21) expresionRelacional -> . expresion DISTINTO expresion
+    (22) expresionRelacional -> . expresion IGUAL expresion
+    (23) expresionRelacional -> . expresion IGUALA expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
+    (34) terminal -> . NUMERO
+    (35) terminal -> . IDENTIFICADOR
 
-    PUNTOS          shift and go to state 45
+    NUMERO          shift and go to state 10
+    IDENTIFICADOR   shift and go to state 17
 
+    expresion                      shift and go to state 18
+    terminal                       shift and go to state 6
+    expresiones                    shift and go to state 44
+    expresionRelacional            shift and go to state 15
 
 state 22
 
-    (30) test -> PARENIZQ . expresionRelacional PARENDER
-    (13) expresionRelacional -> . expresion MAYORQUE terminal
-    (14) expresionRelacional -> . expresion MENORQUE terminal
-    (15) expresionRelacional -> . expresion MAYORIGUALQUE terminal
-    (16) expresionRelacional -> . expresion MENORIGUALQUE terminal
-    (17) expresionRelacional -> . expresion IN terminal
-    (18) expresionRelacional -> . expresion NOTIN terminal
-    (19) expresionRelacional -> . expresion IS terminal
-    (20) expresionRelacional -> . expresion ISNOT terminal
-    (21) expresionRelacional -> . expresion DIFERENTE terminal
-    (22) expresionRelacional -> . expresion DISTINTO terminal
-    (23) expresionRelacional -> . expresion IGUAL terminal
-    (24) expresionRelacional -> . expresion IGUALA terminal
-    (25) expresion -> . expresion SUMA terminal
-    (26) expresion -> . expresion RESTA terminal
-    (27) expresion -> . expresion MULTIPLICACION terminal
-    (28) expresion -> . expresion DIVISION terminal
+    (27) expresion -> expresion DIVISION . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
     (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    expresion                      shift and go to state 47
+    expresion                      shift and go to state 45
     terminal                       shift and go to state 6
-    expresionRelacional            shift and go to state 46
 
 state 23
 
-    (28) expresion -> expresion DIVISION . terminal
+    (17) expresionRelacional -> expresion NOTIN . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 48
+    expresion                      shift and go to state 46
+    terminal                       shift and go to state 6
 
 state 24
 
-    (18) expresionRelacional -> expresion NOTIN . terminal
+    (19) expresionRelacional -> expresion ISNOT . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 49
+    expresion                      shift and go to state 47
+    terminal                       shift and go to state 6
 
 state 25
 
-    (20) expresionRelacional -> expresion ISNOT . terminal
+    (21) expresionRelacional -> expresion DISTINTO . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 50
+    expresion                      shift and go to state 48
+    terminal                       shift and go to state 6
 
 state 26
 
-    (22) expresionRelacional -> expresion DISTINTO . terminal
+    (14) expresionRelacional -> expresion MAYORIGUALQUE . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 51
+    expresion                      shift and go to state 49
+    terminal                       shift and go to state 6
 
 state 27
 
-    (15) expresionRelacional -> expresion MAYORIGUALQUE . terminal
+    (18) expresionRelacional -> expresion IS . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 52
+    expresion                      shift and go to state 50
+    terminal                       shift and go to state 6
 
 state 28
 
-    (19) expresionRelacional -> expresion IS . terminal
+    (16) expresionRelacional -> expresion IN . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 53
+    expresion                      shift and go to state 51
+    terminal                       shift and go to state 6
 
 state 29
 
-    (17) expresionRelacional -> expresion IN . terminal
+    (15) expresionRelacional -> expresion MENORIGUALQUE . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 54
+    expresion                      shift and go to state 52
+    terminal                       shift and go to state 6
 
 state 30
 
-    (16) expresionRelacional -> expresion MENORIGUALQUE . terminal
+    (20) expresionRelacional -> expresion DIFERENTE . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 55
+    expresion                      shift and go to state 53
+    terminal                       shift and go to state 6
 
 state 31
 
-    (21) expresionRelacional -> expresion DIFERENTE . terminal
+    (26) expresion -> expresion MULTIPLICACION . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 56
+    expresion                      shift and go to state 54
+    terminal                       shift and go to state 6
 
 state 32
 
-    (27) expresion -> expresion MULTIPLICACION . terminal
+    (13) expresionRelacional -> expresion MENORQUE . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 57
+    expresion                      shift and go to state 55
+    terminal                       shift and go to state 6
 
 state 33
 
-    (14) expresionRelacional -> expresion MENORQUE . terminal
+    (12) expresionRelacional -> expresion MAYORQUE . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 58
+    expresion                      shift and go to state 56
+    terminal                       shift and go to state 6
 
 state 34
 
-    (13) expresionRelacional -> expresion MAYORQUE . terminal
+    (23) expresionRelacional -> expresion IGUALA . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 59
+    expresion                      shift and go to state 57
+    terminal                       shift and go to state 6
 
 state 35
 
-    (24) expresionRelacional -> expresion IGUALA . terminal
+    (25) expresion -> expresion RESTA . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 60
+    expresion                      shift and go to state 58
+    terminal                       shift and go to state 6
 
 state 36
 
-    (26) expresion -> expresion RESTA . terminal
+    (22) expresionRelacional -> expresion IGUAL . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 61
+    expresion                      shift and go to state 59
+    terminal                       shift and go to state 6
 
 state 37
 
-    (23) expresionRelacional -> expresion IGUAL . terminal
+    (24) expresion -> expresion SUMA . expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 62
+    expresion                      shift and go to state 60
+    terminal                       shift and go to state 6
 
 state 38
 
-    (25) expresion -> expresion SUMA . terminal
+    (9) expresionLogica -> NOT PARENIZQ . expresiones PARENDER
+    (10) expresiones -> . expresionRelacional
+    (11) expresiones -> . expresion
+    (12) expresionRelacional -> . expresion MAYORQUE expresion
+    (13) expresionRelacional -> . expresion MENORQUE expresion
+    (14) expresionRelacional -> . expresion MAYORIGUALQUE expresion
+    (15) expresionRelacional -> . expresion MENORIGUALQUE expresion
+    (16) expresionRelacional -> . expresion IN expresion
+    (17) expresionRelacional -> . expresion NOTIN expresion
+    (18) expresionRelacional -> . expresion IS expresion
+    (19) expresionRelacional -> . expresion ISNOT expresion
+    (20) expresionRelacional -> . expresion DIFERENTE expresion
+    (21) expresionRelacional -> . expresion DISTINTO expresion
+    (22) expresionRelacional -> . expresion IGUAL expresion
+    (23) expresionRelacional -> . expresion IGUALA expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    terminal                       shift and go to state 63
+    expresion                      shift and go to state 18
+    terminal                       shift and go to state 6
+    expresiones                    shift and go to state 61
+    expresionRelacional            shift and go to state 15
 
 state 39
 
-    (10) expresionLogica -> NOT PARENIZQ . expresiones PARENDER
-    (11) expresiones -> . expresionRelacional
-    (12) expresiones -> . expresion
-    (13) expresionRelacional -> . expresion MAYORQUE terminal
-    (14) expresionRelacional -> . expresion MENORQUE terminal
-    (15) expresionRelacional -> . expresion MAYORIGUALQUE terminal
-    (16) expresionRelacional -> . expresion MENORIGUALQUE terminal
-    (17) expresionRelacional -> . expresion IN terminal
-    (18) expresionRelacional -> . expresion NOTIN terminal
-    (19) expresionRelacional -> . expresion IS terminal
-    (20) expresionRelacional -> . expresion ISNOT terminal
-    (21) expresionRelacional -> . expresion DIFERENTE terminal
-    (22) expresionRelacional -> . expresion DISTINTO terminal
-    (23) expresionRelacional -> . expresion IGUAL terminal
-    (24) expresionRelacional -> . expresion IGUALA terminal
-    (25) expresion -> . expresion SUMA terminal
-    (26) expresion -> . expresion RESTA terminal
-    (27) expresion -> . expresion MULTIPLICACION terminal
-    (28) expresion -> . expresion DIVISION terminal
-    (33) expresion -> . terminal
-    (34) terminal -> . NUMERO
-    (35) terminal -> . IDENTIFICADOR
+    (32) print_stc -> PRINT PARENIZQ STRING . PARENDER
 
-    NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    PARENDER        shift and go to state 62
 
-    expresion                      shift and go to state 65
-    terminal                       shift and go to state 6
-    expresiones                    shift and go to state 64
-    expresionRelacional            shift and go to state 16
 
 state 40
 
-    (32) print_stc -> PRINT PARENIZQ STRING . PARENDER
+    (8) expresionLogica -> PARENIZQ expresiones AND . expresiones PARENDER
+    (10) expresiones -> . expresionRelacional
+    (11) expresiones -> . expresion
+    (12) expresionRelacional -> . expresion MAYORQUE expresion
+    (13) expresionRelacional -> . expresion MENORQUE expresion
+    (14) expresionRelacional -> . expresion MAYORIGUALQUE expresion
+    (15) expresionRelacional -> . expresion MENORIGUALQUE expresion
+    (16) expresionRelacional -> . expresion IN expresion
+    (17) expresionRelacional -> . expresion NOTIN expresion
+    (18) expresionRelacional -> . expresion IS expresion
+    (19) expresionRelacional -> . expresion ISNOT expresion
+    (20) expresionRelacional -> . expresion DIFERENTE expresion
+    (21) expresionRelacional -> . expresion DISTINTO expresion
+    (22) expresionRelacional -> . expresion IGUAL expresion
+    (23) expresionRelacional -> . expresion IGUALA expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
+    (33) expresion -> . terminal
+    (34) terminal -> . NUMERO
+    (35) terminal -> . IDENTIFICADOR
 
-    PARENDER        shift and go to state 66
+    NUMERO          shift and go to state 10
+    IDENTIFICADOR   shift and go to state 17
 
+    expresion                      shift and go to state 18
+    terminal                       shift and go to state 6
+    expresiones                    shift and go to state 63
+    expresionRelacional            shift and go to state 15
 
 state 41
 
-    (9) expresionLogica -> PARENIZQ expresiones AND . expresiones PARENDER
-    (11) expresiones -> . expresionRelacional
-    (12) expresiones -> . expresion
-    (13) expresionRelacional -> . expresion MAYORQUE terminal
-    (14) expresionRelacional -> . expresion MENORQUE terminal
-    (15) expresionRelacional -> . expresion MAYORIGUALQUE terminal
-    (16) expresionRelacional -> . expresion MENORIGUALQUE terminal
-    (17) expresionRelacional -> . expresion IN terminal
-    (18) expresionRelacional -> . expresion NOTIN terminal
-    (19) expresionRelacional -> . expresion IS terminal
-    (20) expresionRelacional -> . expresion ISNOT terminal
-    (21) expresionRelacional -> . expresion DIFERENTE terminal
-    (22) expresionRelacional -> . expresion DISTINTO terminal
-    (23) expresionRelacional -> . expresion IGUAL terminal
-    (24) expresionRelacional -> . expresion IGUALA terminal
-    (25) expresion -> . expresion SUMA terminal
-    (26) expresion -> . expresion RESTA terminal
-    (27) expresion -> . expresion MULTIPLICACION terminal
-    (28) expresion -> . expresion DIVISION terminal
+    (7) expresionLogica -> PARENIZQ expresiones OR . expresiones PARENDER
+    (10) expresiones -> . expresionRelacional
+    (11) expresiones -> . expresion
+    (12) expresionRelacional -> . expresion MAYORQUE expresion
+    (13) expresionRelacional -> . expresion MENORQUE expresion
+    (14) expresionRelacional -> . expresion MAYORIGUALQUE expresion
+    (15) expresionRelacional -> . expresion MENORIGUALQUE expresion
+    (16) expresionRelacional -> . expresion IN expresion
+    (17) expresionRelacional -> . expresion NOTIN expresion
+    (18) expresionRelacional -> . expresion IS expresion
+    (19) expresionRelacional -> . expresion ISNOT expresion
+    (20) expresionRelacional -> . expresion DIFERENTE expresion
+    (21) expresionRelacional -> . expresion DISTINTO expresion
+    (22) expresionRelacional -> . expresion IGUAL expresion
+    (23) expresionRelacional -> . expresion IGUALA expresion
+    (24) expresion -> . expresion SUMA expresion
+    (25) expresion -> . expresion RESTA expresion
+    (26) expresion -> . expresion MULTIPLICACION expresion
+    (27) expresion -> . expresion DIVISION expresion
     (33) expresion -> . terminal
     (34) terminal -> . NUMERO
     (35) terminal -> . IDENTIFICADOR
 
     NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    IDENTIFICADOR   shift and go to state 17
 
-    expresion                      shift and go to state 65
+    expresion                      shift and go to state 18
     terminal                       shift and go to state 6
-    expresiones                    shift and go to state 67
-    expresionRelacional            shift and go to state 16
+    expresiones                    shift and go to state 64
+    expresionRelacional            shift and go to state 15
 
 state 42
 
-    (8) expresionLogica -> PARENIZQ expresiones OR . expresiones PARENDER
-    (11) expresiones -> . expresionRelacional
-    (12) expresiones -> . expresion
-    (13) expresionRelacional -> . expresion MAYORQUE terminal
-    (14) expresionRelacional -> . expresion MENORQUE terminal
-    (15) expresionRelacional -> . expresion MAYORIGUALQUE terminal
-    (16) expresionRelacional -> . expresion MENORIGUALQUE terminal
-    (17) expresionRelacional -> . expresion IN terminal
-    (18) expresionRelacional -> . expresion NOTIN terminal
-    (19) expresionRelacional -> . expresion IS terminal
-    (20) expresionRelacional -> . expresion ISNOT terminal
-    (21) expresionRelacional -> . expresion DIFERENTE terminal
-    (22) expresionRelacional -> . expresion DISTINTO terminal
-    (23) expresionRelacional -> . expresion IGUAL terminal
-    (24) expresionRelacional -> . expresion IGUALA terminal
-    (25) expresion -> . expresion SUMA terminal
-    (26) expresion -> . expresion RESTA terminal
-    (27) expresion -> . expresion MULTIPLICACION terminal
-    (28) expresion -> . expresion DIVISION terminal
-    (33) expresion -> . terminal
-    (34) terminal -> . NUMERO
-    (35) terminal -> . IDENTIFICADOR
+    (1) sentencia -> IDENTIFICADOR IGUAL expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    NUMERO          shift and go to state 10
-    IDENTIFICADOR   shift and go to state 18
+    $end            reduce using rule 1 (sentencia -> IDENTIFICADOR IGUAL expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
-    expresion                      shift and go to state 65
-    terminal                       shift and go to state 6
-    expresiones                    shift and go to state 68
-    expresionRelacional            shift and go to state 16
 
 state 43
 
-    (29) expresionGrupo -> PARENIZQ expresion PARENDER .
+    (29) if_stc -> IF test PUNTOS .
 
-    $end            reduce using rule 29 (expresionGrupo -> PARENIZQ expresion PARENDER .)
+    $end            reduce using rule 29 (if_stc -> IF test PUNTOS .)
 
 
 state 44
 
-    (1) sentencia -> IDENTIFICADOR IGUAL expresion .
-    (25) expresion -> expresion . SUMA terminal
-    (26) expresion -> expresion . RESTA terminal
-    (27) expresion -> expresion . MULTIPLICACION terminal
-    (28) expresion -> expresion . DIVISION terminal
+    (28) test -> PARENIZQ expresiones . PARENDER
 
-    $end            reduce using rule 1 (sentencia -> IDENTIFICADOR IGUAL expresion .)
-    SUMA            shift and go to state 38
-    RESTA           shift and go to state 36
-    MULTIPLICACION  shift and go to state 32
-    DIVISION        shift and go to state 23
+    PARENDER        shift and go to state 65
 
 
 state 45
 
-    (31) if_stc -> IF test PUNTOS .
+    (27) expresion -> expresion DIVISION expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    $end            reduce using rule 31 (if_stc -> IF test PUNTOS .)
+    SUMA            reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    RESTA           reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    MULTIPLICACION  reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    DIVISION        reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    $end            reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    OR              reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    AND             reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    PARENDER        reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    MAYORQUE        reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    MENORQUE        reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    MAYORIGUALQUE   reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    MENORIGUALQUE   reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    IN              reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    NOTIN           reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    IS              reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    ISNOT           reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    DIFERENTE       reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    DISTINTO        reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    IGUAL           reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+    IGUALA          reduce using rule 27 (expresion -> expresion DIVISION expresion .)
+
+  ! SUMA            [ shift and go to state 37 ]
+  ! RESTA           [ shift and go to state 35 ]
+  ! MULTIPLICACION  [ shift and go to state 31 ]
+  ! DIVISION        [ shift and go to state 22 ]
 
 
 state 46
 
-    (30) test -> PARENIZQ expresionRelacional . PARENDER
+    (17) expresionRelacional -> expresion NOTIN expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    PARENDER        shift and go to state 69
+    PARENDER        reduce using rule 17 (expresionRelacional -> expresion NOTIN expresion .)
+    $end            reduce using rule 17 (expresionRelacional -> expresion NOTIN expresion .)
+    OR              reduce using rule 17 (expresionRelacional -> expresion NOTIN expresion .)
+    AND             reduce using rule 17 (expresionRelacional -> expresion NOTIN expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
 
 state 47
 
-    (13) expresionRelacional -> expresion . MAYORQUE terminal
-    (14) expresionRelacional -> expresion . MENORQUE terminal
-    (15) expresionRelacional -> expresion . MAYORIGUALQUE terminal
-    (16) expresionRelacional -> expresion . MENORIGUALQUE terminal
-    (17) expresionRelacional -> expresion . IN terminal
-    (18) expresionRelacional -> expresion . NOTIN terminal
-    (19) expresionRelacional -> expresion . IS terminal
-    (20) expresionRelacional -> expresion . ISNOT terminal
-    (21) expresionRelacional -> expresion . DIFERENTE terminal
-    (22) expresionRelacional -> expresion . DISTINTO terminal
-    (23) expresionRelacional -> expresion . IGUAL terminal
-    (24) expresionRelacional -> expresion . IGUALA terminal
-    (25) expresion -> expresion . SUMA terminal
-    (26) expresion -> expresion . RESTA terminal
-    (27) expresion -> expresion . MULTIPLICACION terminal
-    (28) expresion -> expresion . DIVISION terminal
+    (19) expresionRelacional -> expresion ISNOT expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    MAYORQUE        shift and go to state 34
-    MENORQUE        shift and go to state 33
-    MAYORIGUALQUE   shift and go to state 27
-    MENORIGUALQUE   shift and go to state 30
-    IN              shift and go to state 29
-    NOTIN           shift and go to state 24
-    IS              shift and go to state 28
-    ISNOT           shift and go to state 25
-    DIFERENTE       shift and go to state 31
-    DISTINTO        shift and go to state 26
-    IGUAL           shift and go to state 37
-    IGUALA          shift and go to state 35
-    SUMA            shift and go to state 38
-    RESTA           shift and go to state 36
-    MULTIPLICACION  shift and go to state 32
-    DIVISION        shift and go to state 23
+    PARENDER        reduce using rule 19 (expresionRelacional -> expresion ISNOT expresion .)
+    $end            reduce using rule 19 (expresionRelacional -> expresion ISNOT expresion .)
+    OR              reduce using rule 19 (expresionRelacional -> expresion ISNOT expresion .)
+    AND             reduce using rule 19 (expresionRelacional -> expresion ISNOT expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
 
 state 48
 
-    (28) expresion -> expresion DIVISION terminal .
+    (21) expresionRelacional -> expresion DISTINTO expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    SUMA            reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    RESTA           reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    MULTIPLICACION  reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    DIVISION        reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    $end            reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    MAYORQUE        reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    MENORQUE        reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    MAYORIGUALQUE   reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    MENORIGUALQUE   reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    IN              reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    NOTIN           reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    IS              reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    ISNOT           reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    DIFERENTE       reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    DISTINTO        reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    IGUAL           reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    IGUALA          reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    PARENDER        reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    OR              reduce using rule 28 (expresion -> expresion DIVISION terminal .)
-    AND             reduce using rule 28 (expresion -> expresion DIVISION terminal .)
+    PARENDER        reduce using rule 21 (expresionRelacional -> expresion DISTINTO expresion .)
+    $end            reduce using rule 21 (expresionRelacional -> expresion DISTINTO expresion .)
+    OR              reduce using rule 21 (expresionRelacional -> expresion DISTINTO expresion .)
+    AND             reduce using rule 21 (expresionRelacional -> expresion DISTINTO expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
 
 state 49
 
-    (18) expresionRelacional -> expresion NOTIN terminal .
+    (14) expresionRelacional -> expresion MAYORIGUALQUE expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    PARENDER        reduce using rule 18 (expresionRelacional -> expresion NOTIN terminal .)
-    $end            reduce using rule 18 (expresionRelacional -> expresion NOTIN terminal .)
-    OR              reduce using rule 18 (expresionRelacional -> expresion NOTIN terminal .)
-    AND             reduce using rule 18 (expresionRelacional -> expresion NOTIN terminal .)
+    PARENDER        reduce using rule 14 (expresionRelacional -> expresion MAYORIGUALQUE expresion .)
+    $end            reduce using rule 14 (expresionRelacional -> expresion MAYORIGUALQUE expresion .)
+    OR              reduce using rule 14 (expresionRelacional -> expresion MAYORIGUALQUE expresion .)
+    AND             reduce using rule 14 (expresionRelacional -> expresion MAYORIGUALQUE expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
 
 state 50
 
-    (20) expresionRelacional -> expresion ISNOT terminal .
+    (18) expresionRelacional -> expresion IS expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    PARENDER        reduce using rule 20 (expresionRelacional -> expresion ISNOT terminal .)
-    $end            reduce using rule 20 (expresionRelacional -> expresion ISNOT terminal .)
-    OR              reduce using rule 20 (expresionRelacional -> expresion ISNOT terminal .)
-    AND             reduce using rule 20 (expresionRelacional -> expresion ISNOT terminal .)
+    PARENDER        reduce using rule 18 (expresionRelacional -> expresion IS expresion .)
+    $end            reduce using rule 18 (expresionRelacional -> expresion IS expresion .)
+    OR              reduce using rule 18 (expresionRelacional -> expresion IS expresion .)
+    AND             reduce using rule 18 (expresionRelacional -> expresion IS expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
 
 state 51
 
-    (22) expresionRelacional -> expresion DISTINTO terminal .
+    (16) expresionRelacional -> expresion IN expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    PARENDER        reduce using rule 22 (expresionRelacional -> expresion DISTINTO terminal .)
-    $end            reduce using rule 22 (expresionRelacional -> expresion DISTINTO terminal .)
-    OR              reduce using rule 22 (expresionRelacional -> expresion DISTINTO terminal .)
-    AND             reduce using rule 22 (expresionRelacional -> expresion DISTINTO terminal .)
+    PARENDER        reduce using rule 16 (expresionRelacional -> expresion IN expresion .)
+    $end            reduce using rule 16 (expresionRelacional -> expresion IN expresion .)
+    OR              reduce using rule 16 (expresionRelacional -> expresion IN expresion .)
+    AND             reduce using rule 16 (expresionRelacional -> expresion IN expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
 
 state 52
 
-    (15) expresionRelacional -> expresion MAYORIGUALQUE terminal .
+    (15) expresionRelacional -> expresion MENORIGUALQUE expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    PARENDER        reduce using rule 15 (expresionRelacional -> expresion MAYORIGUALQUE terminal .)
-    $end            reduce using rule 15 (expresionRelacional -> expresion MAYORIGUALQUE terminal .)
-    OR              reduce using rule 15 (expresionRelacional -> expresion MAYORIGUALQUE terminal .)
-    AND             reduce using rule 15 (expresionRelacional -> expresion MAYORIGUALQUE terminal .)
+    PARENDER        reduce using rule 15 (expresionRelacional -> expresion MENORIGUALQUE expresion .)
+    $end            reduce using rule 15 (expresionRelacional -> expresion MENORIGUALQUE expresion .)
+    OR              reduce using rule 15 (expresionRelacional -> expresion MENORIGUALQUE expresion .)
+    AND             reduce using rule 15 (expresionRelacional -> expresion MENORIGUALQUE expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
 
 state 53
 
-    (19) expresionRelacional -> expresion IS terminal .
+    (20) expresionRelacional -> expresion DIFERENTE expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    PARENDER        reduce using rule 19 (expresionRelacional -> expresion IS terminal .)
-    $end            reduce using rule 19 (expresionRelacional -> expresion IS terminal .)
-    OR              reduce using rule 19 (expresionRelacional -> expresion IS terminal .)
-    AND             reduce using rule 19 (expresionRelacional -> expresion IS terminal .)
+    PARENDER        reduce using rule 20 (expresionRelacional -> expresion DIFERENTE expresion .)
+    $end            reduce using rule 20 (expresionRelacional -> expresion DIFERENTE expresion .)
+    OR              reduce using rule 20 (expresionRelacional -> expresion DIFERENTE expresion .)
+    AND             reduce using rule 20 (expresionRelacional -> expresion DIFERENTE expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
 
 state 54
 
-    (17) expresionRelacional -> expresion IN terminal .
+    (26) expresion -> expresion MULTIPLICACION expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    PARENDER        reduce using rule 17 (expresionRelacional -> expresion IN terminal .)
-    $end            reduce using rule 17 (expresionRelacional -> expresion IN terminal .)
-    OR              reduce using rule 17 (expresionRelacional -> expresion IN terminal .)
-    AND             reduce using rule 17 (expresionRelacional -> expresion IN terminal .)
+    SUMA            reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    RESTA           reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    MULTIPLICACION  reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    DIVISION        reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    $end            reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    OR              reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    AND             reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    PARENDER        reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    MAYORQUE        reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    MENORQUE        reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    MAYORIGUALQUE   reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    MENORIGUALQUE   reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    IN              reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    NOTIN           reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    IS              reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    ISNOT           reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    DIFERENTE       reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    DISTINTO        reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    IGUAL           reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+    IGUALA          reduce using rule 26 (expresion -> expresion MULTIPLICACION expresion .)
+
+  ! SUMA            [ shift and go to state 37 ]
+  ! RESTA           [ shift and go to state 35 ]
+  ! MULTIPLICACION  [ shift and go to state 31 ]
+  ! DIVISION        [ shift and go to state 22 ]
 
 
 state 55
 
-    (16) expresionRelacional -> expresion MENORIGUALQUE terminal .
+    (13) expresionRelacional -> expresion MENORQUE expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    PARENDER        reduce using rule 16 (expresionRelacional -> expresion MENORIGUALQUE terminal .)
-    $end            reduce using rule 16 (expresionRelacional -> expresion MENORIGUALQUE terminal .)
-    OR              reduce using rule 16 (expresionRelacional -> expresion MENORIGUALQUE terminal .)
-    AND             reduce using rule 16 (expresionRelacional -> expresion MENORIGUALQUE terminal .)
+    PARENDER        reduce using rule 13 (expresionRelacional -> expresion MENORQUE expresion .)
+    $end            reduce using rule 13 (expresionRelacional -> expresion MENORQUE expresion .)
+    OR              reduce using rule 13 (expresionRelacional -> expresion MENORQUE expresion .)
+    AND             reduce using rule 13 (expresionRelacional -> expresion MENORQUE expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
 
 state 56
 
-    (21) expresionRelacional -> expresion DIFERENTE terminal .
+    (12) expresionRelacional -> expresion MAYORQUE expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    PARENDER        reduce using rule 21 (expresionRelacional -> expresion DIFERENTE terminal .)
-    $end            reduce using rule 21 (expresionRelacional -> expresion DIFERENTE terminal .)
-    OR              reduce using rule 21 (expresionRelacional -> expresion DIFERENTE terminal .)
-    AND             reduce using rule 21 (expresionRelacional -> expresion DIFERENTE terminal .)
+    PARENDER        reduce using rule 12 (expresionRelacional -> expresion MAYORQUE expresion .)
+    $end            reduce using rule 12 (expresionRelacional -> expresion MAYORQUE expresion .)
+    OR              reduce using rule 12 (expresionRelacional -> expresion MAYORQUE expresion .)
+    AND             reduce using rule 12 (expresionRelacional -> expresion MAYORQUE expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
 
 state 57
 
-    (27) expresion -> expresion MULTIPLICACION terminal .
+    (23) expresionRelacional -> expresion IGUALA expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    SUMA            reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    RESTA           reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    MULTIPLICACION  reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    DIVISION        reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    $end            reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    MAYORQUE        reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    MENORQUE        reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    MAYORIGUALQUE   reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    MENORIGUALQUE   reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    IN              reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    NOTIN           reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    IS              reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    ISNOT           reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    DIFERENTE       reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    DISTINTO        reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    IGUAL           reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    IGUALA          reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    PARENDER        reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    OR              reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
-    AND             reduce using rule 27 (expresion -> expresion MULTIPLICACION terminal .)
+    PARENDER        reduce using rule 23 (expresionRelacional -> expresion IGUALA expresion .)
+    $end            reduce using rule 23 (expresionRelacional -> expresion IGUALA expresion .)
+    OR              reduce using rule 23 (expresionRelacional -> expresion IGUALA expresion .)
+    AND             reduce using rule 23 (expresionRelacional -> expresion IGUALA expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
 
 state 58
 
-    (14) expresionRelacional -> expresion MENORQUE terminal .
+    (25) expresion -> expresion RESTA expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    PARENDER        reduce using rule 14 (expresionRelacional -> expresion MENORQUE terminal .)
-    $end            reduce using rule 14 (expresionRelacional -> expresion MENORQUE terminal .)
-    OR              reduce using rule 14 (expresionRelacional -> expresion MENORQUE terminal .)
-    AND             reduce using rule 14 (expresionRelacional -> expresion MENORQUE terminal .)
+    SUMA            reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    RESTA           reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    $end            reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    OR              reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    AND             reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    PARENDER        reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    MAYORQUE        reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    MENORQUE        reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    MAYORIGUALQUE   reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    MENORIGUALQUE   reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    IN              reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    NOTIN           reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    IS              reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    ISNOT           reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    DIFERENTE       reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    DISTINTO        reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    IGUAL           reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    IGUALA          reduce using rule 25 (expresion -> expresion RESTA expresion .)
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
+
+  ! MULTIPLICACION  [ reduce using rule 25 (expresion -> expresion RESTA expresion .) ]
+  ! DIVISION        [ reduce using rule 25 (expresion -> expresion RESTA expresion .) ]
+  ! SUMA            [ shift and go to state 37 ]
+  ! RESTA           [ shift and go to state 35 ]
 
 
 state 59
 
-    (13) expresionRelacional -> expresion MAYORQUE terminal .
+    (22) expresionRelacional -> expresion IGUAL expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    PARENDER        reduce using rule 13 (expresionRelacional -> expresion MAYORQUE terminal .)
-    $end            reduce using rule 13 (expresionRelacional -> expresion MAYORQUE terminal .)
-    OR              reduce using rule 13 (expresionRelacional -> expresion MAYORQUE terminal .)
-    AND             reduce using rule 13 (expresionRelacional -> expresion MAYORQUE terminal .)
+    PARENDER        reduce using rule 22 (expresionRelacional -> expresion IGUAL expresion .)
+    $end            reduce using rule 22 (expresionRelacional -> expresion IGUAL expresion .)
+    OR              reduce using rule 22 (expresionRelacional -> expresion IGUAL expresion .)
+    AND             reduce using rule 22 (expresionRelacional -> expresion IGUAL expresion .)
+    SUMA            shift and go to state 37
+    RESTA           shift and go to state 35
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
 
 
 state 60
 
-    (24) expresionRelacional -> expresion IGUALA terminal .
+    (24) expresion -> expresion SUMA expresion .
+    (24) expresion -> expresion . SUMA expresion
+    (25) expresion -> expresion . RESTA expresion
+    (26) expresion -> expresion . MULTIPLICACION expresion
+    (27) expresion -> expresion . DIVISION expresion
 
-    PARENDER        reduce using rule 24 (expresionRelacional -> expresion IGUALA terminal .)
-    $end            reduce using rule 24 (expresionRelacional -> expresion IGUALA terminal .)
-    OR              reduce using rule 24 (expresionRelacional -> expresion IGUALA terminal .)
-    AND             reduce using rule 24 (expresionRelacional -> expresion IGUALA terminal .)
+    SUMA            reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    RESTA           reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    $end            reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    OR              reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    AND             reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    PARENDER        reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    MAYORQUE        reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    MENORQUE        reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    MAYORIGUALQUE   reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    MENORIGUALQUE   reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    IN              reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    NOTIN           reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    IS              reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    ISNOT           reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    DIFERENTE       reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    DISTINTO        reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    IGUAL           reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    IGUALA          reduce using rule 24 (expresion -> expresion SUMA expresion .)
+    MULTIPLICACION  shift and go to state 31
+    DIVISION        shift and go to state 22
+
+  ! MULTIPLICACION  [ reduce using rule 24 (expresion -> expresion SUMA expresion .) ]
+  ! DIVISION        [ reduce using rule 24 (expresion -> expresion SUMA expresion .) ]
+  ! SUMA            [ shift and go to state 37 ]
+  ! RESTA           [ shift and go to state 35 ]
 
 
 state 61
 
-    (26) expresion -> expresion RESTA terminal .
+    (9) expresionLogica -> NOT PARENIZQ expresiones . PARENDER
 
-    SUMA            reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    RESTA           reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    MULTIPLICACION  reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    DIVISION        reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    $end            reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    MAYORQUE        reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    MENORQUE        reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    MAYORIGUALQUE   reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    MENORIGUALQUE   reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    IN              reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    NOTIN           reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    IS              reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    ISNOT           reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    DIFERENTE       reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    DISTINTO        reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    IGUAL           reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    IGUALA          reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    PARENDER        reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    OR              reduce using rule 26 (expresion -> expresion RESTA terminal .)
-    AND             reduce using rule 26 (expresion -> expresion RESTA terminal .)
+    PARENDER        shift and go to state 66
 
 
 state 62
-
-    (23) expresionRelacional -> expresion IGUAL terminal .
-
-    PARENDER        reduce using rule 23 (expresionRelacional -> expresion IGUAL terminal .)
-    $end            reduce using rule 23 (expresionRelacional -> expresion IGUAL terminal .)
-    OR              reduce using rule 23 (expresionRelacional -> expresion IGUAL terminal .)
-    AND             reduce using rule 23 (expresionRelacional -> expresion IGUAL terminal .)
-
-
-state 63
-
-    (25) expresion -> expresion SUMA terminal .
-
-    SUMA            reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    RESTA           reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    MULTIPLICACION  reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    DIVISION        reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    $end            reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    MAYORQUE        reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    MENORQUE        reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    MAYORIGUALQUE   reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    MENORIGUALQUE   reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    IN              reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    NOTIN           reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    IS              reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    ISNOT           reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    DIFERENTE       reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    DISTINTO        reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    IGUAL           reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    IGUALA          reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    PARENDER        reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    OR              reduce using rule 25 (expresion -> expresion SUMA terminal .)
-    AND             reduce using rule 25 (expresion -> expresion SUMA terminal .)
-
-
-state 64
-
-    (10) expresionLogica -> NOT PARENIZQ expresiones . PARENDER
-
-    PARENDER        shift and go to state 70
-
-
-state 65
-
-    (12) expresiones -> expresion .
-    (13) expresionRelacional -> expresion . MAYORQUE terminal
-    (14) expresionRelacional -> expresion . MENORQUE terminal
-    (15) expresionRelacional -> expresion . MAYORIGUALQUE terminal
-    (16) expresionRelacional -> expresion . MENORIGUALQUE terminal
-    (17) expresionRelacional -> expresion . IN terminal
-    (18) expresionRelacional -> expresion . NOTIN terminal
-    (19) expresionRelacional -> expresion . IS terminal
-    (20) expresionRelacional -> expresion . ISNOT terminal
-    (21) expresionRelacional -> expresion . DIFERENTE terminal
-    (22) expresionRelacional -> expresion . DISTINTO terminal
-    (23) expresionRelacional -> expresion . IGUAL terminal
-    (24) expresionRelacional -> expresion . IGUALA terminal
-    (25) expresion -> expresion . SUMA terminal
-    (26) expresion -> expresion . RESTA terminal
-    (27) expresion -> expresion . MULTIPLICACION terminal
-    (28) expresion -> expresion . DIVISION terminal
-
-    PARENDER        reduce using rule 12 (expresiones -> expresion .)
-    MAYORQUE        shift and go to state 34
-    MENORQUE        shift and go to state 33
-    MAYORIGUALQUE   shift and go to state 27
-    MENORIGUALQUE   shift and go to state 30
-    IN              shift and go to state 29
-    NOTIN           shift and go to state 24
-    IS              shift and go to state 28
-    ISNOT           shift and go to state 25
-    DIFERENTE       shift and go to state 31
-    DISTINTO        shift and go to state 26
-    IGUAL           shift and go to state 37
-    IGUALA          shift and go to state 35
-    SUMA            shift and go to state 38
-    RESTA           shift and go to state 36
-    MULTIPLICACION  shift and go to state 32
-    DIVISION        shift and go to state 23
-
-
-state 66
 
     (32) print_stc -> PRINT PARENIZQ STRING PARENDER .
 
     $end            reduce using rule 32 (print_stc -> PRINT PARENIZQ STRING PARENDER .)
 
 
+state 63
+
+    (8) expresionLogica -> PARENIZQ expresiones AND expresiones . PARENDER
+
+    PARENDER        shift and go to state 67
+
+
+state 64
+
+    (7) expresionLogica -> PARENIZQ expresiones OR expresiones . PARENDER
+
+    PARENDER        shift and go to state 68
+
+
+state 65
+
+    (28) test -> PARENIZQ expresiones PARENDER .
+
+    PUNTOS          reduce using rule 28 (test -> PARENIZQ expresiones PARENDER .)
+
+
+state 66
+
+    (9) expresionLogica -> NOT PARENIZQ expresiones PARENDER .
+
+    $end            reduce using rule 9 (expresionLogica -> NOT PARENIZQ expresiones PARENDER .)
+
+
 state 67
 
-    (9) expresionLogica -> PARENIZQ expresiones AND expresiones . PARENDER
+    (8) expresionLogica -> PARENIZQ expresiones AND expresiones PARENDER .
 
-    PARENDER        shift and go to state 71
+    $end            reduce using rule 8 (expresionLogica -> PARENIZQ expresiones AND expresiones PARENDER .)
 
 
 state 68
 
-    (8) expresionLogica -> PARENIZQ expresiones OR expresiones . PARENDER
+    (7) expresionLogica -> PARENIZQ expresiones OR expresiones PARENDER .
 
-    PARENDER        shift and go to state 72
-
-
-state 69
-
-    (30) test -> PARENIZQ expresionRelacional PARENDER .
-
-    PUNTOS          reduce using rule 30 (test -> PARENIZQ expresionRelacional PARENDER .)
-
-
-state 70
-
-    (10) expresionLogica -> NOT PARENIZQ expresiones PARENDER .
-
-    $end            reduce using rule 10 (expresionLogica -> NOT PARENIZQ expresiones PARENDER .)
-
-
-state 71
-
-    (9) expresionLogica -> PARENIZQ expresiones AND expresiones PARENDER .
-
-    $end            reduce using rule 9 (expresionLogica -> PARENIZQ expresiones AND expresiones PARENDER .)
-
-
-state 72
-
-    (8) expresionLogica -> PARENIZQ expresiones OR expresiones PARENDER .
-
-    $end            reduce using rule 8 (expresionLogica -> PARENIZQ expresiones OR expresiones PARENDER .)
+    $end            reduce using rule 7 (expresionLogica -> PARENIZQ expresiones OR expresiones PARENDER .)
 
